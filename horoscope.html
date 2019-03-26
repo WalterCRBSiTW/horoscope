@@ -57,89 +57,53 @@
         </div>
       </div>
     </nav>
-
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <div class="container-fluid">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="btn-group btn-group-justified">
-                      <h2>生命靈數</h2>
-                    </div>
-                    <br>
-                    <ul id="guessResults" class="list-group">
-                      <li class="list-group-item">
-                        <span class="label label-danger">0A1B</span>
-                        <!--<span class="badge">0A1B</span>-->
-                        1234
-                      </li>
-                      <li class="list-group-item">
-                        <span class="label label-danger">0A3B</span>
-                        <!--<span class="badge">0A3B</span>-->
-                        3456
-                      </li>
-                      <li class="list-group-item">
-                        <span class="label label-danger">0A2B</span>
-                        <!--<span class="badge">0A2B</span>-->
-                        4567
-                      </li>
-                      <li class="list-group-item">
-                        <span class="label label-danger">2A0B</span>
-                        <!--<span class="badge">2A0B</span>-->
-                        6089
-                      </li>
-                      <li class="list-group-item">
-                        <span class="label label-danger">3A0B</span>
-                        <!--<span class="badge">3A0B</span>-->
-                        6345
-                      </li>
-                      <li class="list-group-item">
-                        <span class="label label-success">4A0B</span>
-                        <!--<span class="badge badge-success">4A0B</span>-->
-                        6385
-                      </li>
-                    </ul>
-                    <div class="input-group">
-                      <input id="birthdate" class="form-control" type="date" name="birthdate" value="0">                     
-                      <span class="input-group-btn">
-                        <a id="search" type="button" class="btn btn-primary">分析結果</a>
-                      </span>
-                    </div>
-      
-                    <!-- <h1 id="testans">1111</h1> -->
-                  </div>
+        <div class="row">
+          <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+              <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">Reports</a></li>
+              <li><a href="#">Analytics</a></li>
+              <li><a href="#">Export</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+              <li><a href="">Nav item</a></li>
+              <li><a href="">Nav item again</a></li>
+              <li><a href="">One more nav</a></li>
+              <li><a href="">Another nav item</a></li>
+              <li><a href="">More navigation</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+              <li><a href="">Nav item again</a></li>
+              <li><a href="">One more nav</a></li>
+              <li><a href="">Another nav item</a></li>
+            </ul>
+          </div>
+       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+         <div class="container-fluid">
+           <div class="row">
+             <div class="col-md-12">
+                <div class="btn-group btn-group-justified">
+                  <h2>生命靈數</h2>
                 </div>
-              </div>
+                <br>
+                <ul id="guessResults" class="list-group">
+                  <li class="list-group-item">
 
-          <h2>生命靈數</h2>
-          <!-- put your screen layout here to provide user interface -->
-            <input id="birthdate" class="form-control" type="date" name="birthdate" value="0">
-            <a id="search" type="button" class="btn btn-primary">分析結果</a>
-           
+                  </li>              
+                </ul>
+                <div class="input-group"> 
+                  <input id="birthdate" class="form-control" type="date" name="birthdate" value="0">
+                  <span class="input-group-btn">
+                    <a id="search" type="button" class="btn btn-primary">分析結果</a>
+                  </span>
+                </div>              <!-- <h1 id="testans">1111</h1> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -337,11 +301,20 @@
         var date = dth.getDate();  
         var stday = year.toString() + month.toString() + date.toString();     
         var constellation = checkconstellation(month, date);
-        alert(constellation);
         var constellationJson = horoscopeData[constellation];
         var numerology = Calculation(stday);
         var data = constellationJson["lookup"][numerology-1];
-        alert(data);
+
+        var ctanswer = document.getElementById("guessResults");
+        var newNode = document.createElement("li");
+        newNode.classList.add("list-group-item");
+
+     
+        newNode.innerHTML = "<span class='label label-primary'>"+ constellation +"</span>" 
+                          + " " + data;
+      ctanswer.appendChild(newNode);
+      // userGuess.value="";
+
 
 
              // put your code here to complete analysis
