@@ -314,6 +314,7 @@
         // equal to horoscopeData.aquarius, or others
         //var yourHoroscope = horoscopeData[name]; 改造這一行 ， 使用AJAX 讓星座名可從綫上獲取
         var url = "https://gist.githubusercontent.com/dinowang/5290d4cebf96a666c29ab0878afeb2f1/raw/d8c778aad172fdf9175e1a1109409ba49d2647b8/"+name+".json";
+        //可從 github 的 Raw 拿到完整網址， 在網址後面加上我們要抓取的内容；
         // $.get(url,null,function(result,status,xhr) {
         //   var index = getNumerologyIndex(birthdate);
         //   var html = "<p><span class='label label-info'>" + 
@@ -330,14 +331,14 @@
         // },"json");
         
         $.ajax({
-          type: "get",
-          url: url,
+          type: "get", //告訴 Ajax 使用"get"寫法
+          url: url,    //給連綫的網站
       // data: "{a="A",b="B"}",
-          dataType: "json",
+          dataType: "json",   //要求抓下來的檔案 是"json" 
           error:function(result,status,xhr){
           alert(status+"錯了!")
         },
-          success: function(response) {
+          success: function(response) {         //這裏的 response 用來接前面url的内容 可自己命名； 
             var index = getNumerologyIndex(birthdate);
             var html = "<p><span class='label label-info'>" + 
                     birthdate + "</span> 出生的你，星座是 <em>" +  
