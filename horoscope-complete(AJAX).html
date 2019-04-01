@@ -314,40 +314,49 @@
         // equal to horoscopeData.aquarius, or others
         //var yourHoroscope = horoscopeData[name]; 改造這一行 ， 使用AJAX 讓星座名可從綫上獲取
         var url = "https://gist.githubusercontent.com/dinowang/5290d4cebf96a666c29ab0878afeb2f1/raw/d8c778aad172fdf9175e1a1109409ba49d2647b8/"+name+".json";
-        $.get(url,null,function(result,status,xhr) {
-          var index = getNumerologyIndex(birthdate);
-          var html = "<p><span class='label label-info'>" + 
-                   birthdate + "</span> 出生的你，星座是 <em>" +  
-                   result.name + "</em></p>" +
-                   "<p>你的生命靈數：<br>" + index + ". " + 
-                   result.lookup[index - 1] + "</p>";
+        // $.get(url,null,function(result,status,xhr) {
+        //   var index = getNumerologyIndex(birthdate);
+        //   var html = "<p><span class='label label-info'>" + 
+        //            birthdate + "</span> 出生的你，星座是 <em>" +  
+        //            result.name + "</em></p>" +
+        //            "<p>你的生命靈數：<br>" + index + ". " + 
+        //            result.lookup[index - 1] + "</p>";
                    
-              $("<li></li>")
-          .addClass("list-group-item")
-          .html(html)
-          .prependTo("#results");
+        //       $("<li></li>")
+        //   .addClass("list-group-item")
+        //   .html(html)
+        //   .prependTo("#results");
                   
-        },"json");
-
+        // },"json");
+        
+        $.ajax({
+          type: "get",
+          url: url,
+      // data: "{a="A",b="B"}",
+          dataType: "json",
+          error:function(result,status,xhr){
+          alert(status+"錯了!")
+        },
+          success: function(response) {
+            var index = getNumerologyIndex(birthdate);
+            var html = "<p><span class='label label-info'>" + 
+                    birthdate + "</span> 出生的你，星座是 <em>" +  
+                    response.name + "</em></p>" +
+                   "<p>你的生命靈數：<br>" + index + ". " + 
+                    response.lookup[index - 1] + "</p>";
+                   
+            $("<li></li>")
+              .addClass("list-group-item")
+              .html(html)
+              .prependTo("#results");
+          }                  
+        });   
+      }
       $("#birthdate").keyup(function (event) {
         if (event.keyCode == 13) {
           doAnalysis();
         }
       });
-      }
-
-      // $.ajax({
-      //   type: "get",
-      //   url: url,
-      //   //data: {a = "A", b = "B"}，
-      //   dataType: "json"
-      //   errror: function(result, status,xhr) {
-      //     alert(status + "錯了！")
-      //   },
-
-      
-      // })
-
      
     </script>
   </body>
